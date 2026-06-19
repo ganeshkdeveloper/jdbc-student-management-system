@@ -49,13 +49,92 @@ public class Main {
                 }
             }
             else if (choice == 2) {
-                System.out.println("View Students Selected");
+                 try {
+        Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/schooldb",
+            "root",
+            "root123"
+        );
+
+        PreparedStatement ps = con.prepareStatement(
+            "SELECT * FROM students"
+        );
+
+        ResultSet rs = ps.executeQuery();
+
+        System.out.println("\nID\tNAME");
+        System.out.println("--------------");
+
+        while (rs.next()) {
+            System.out.println(
+                rs.getInt("id") + "\t" +
+                rs.getString("name")
+            );
+        }
+
+        con.close();
+
+    } catch (Exception e) {
+        System.out.println(e);
+    }
             }
             else if (choice == 3) {
-                System.out.println("Update Student Selected");
+                try {
+        Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/schooldb",
+            "root",
+            "root123"
+        );
+
+        System.out.print("Enter Student ID to Update: ");
+        int id = sc.nextInt();
+
+        System.out.print("Enter New Name: ");
+        String name = sc.next();
+
+        PreparedStatement ps = con.prepareStatement(
+            "UPDATE students SET name=? WHERE id=?"
+        );
+
+        ps.setString(1, name);
+        ps.setInt(2, id);
+
+        int rows = ps.executeUpdate();
+
+        System.out.println(rows + " student updated");
+
+        con.close();
+
+    } catch (Exception e) {
+        System.out.println(e);
+    }
             }
             else if (choice == 4) {
-                System.out.println("Delete Student Selected");
+                 try {
+        Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/schooldb",
+            "root",
+            "root123"
+        );
+
+        System.out.print("Enter Student ID to Delete: ");
+        int id = sc.nextInt();
+
+        PreparedStatement ps = con.prepareStatement(
+            "DELETE FROM students WHERE id=?"
+        );
+
+        ps.setInt(1, id);
+
+        int rows = ps.executeUpdate();
+
+        System.out.println(rows + " student deleted");
+
+        con.close();
+
+    } catch (Exception e) {
+        System.out.println(e);
+    }
             }
             else if (choice == 5) {
                 System.out.println("Exiting...");
