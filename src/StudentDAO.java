@@ -95,4 +95,65 @@ public void deleteStudent(int id) {
         System.out.println(e);
     }
 }
+public void searchStudent(int id) {
+
+    try {
+
+        Connection con = DBConnection.getConnection();
+
+        PreparedStatement ps = con.prepareStatement(
+            "SELECT * FROM students WHERE id=?"
+        );
+
+        ps.setInt(1, id);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()) {
+
+            System.out.println("\nStudent Found");
+            System.out.println("ID: " + rs.getInt("id"));
+            System.out.println("Name: " + rs.getString("name"));
+
+        } else {
+
+            System.out.println("Student Not Found");
+        }
+
+        con.close();
+
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+}public void searchStudentByName(String name) {
+
+    try {
+
+        Connection con = DBConnection.getConnection();
+
+        PreparedStatement ps = con.prepareStatement(
+            "SELECT * FROM students WHERE name=?"
+        );
+
+        ps.setString(1, name);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()) {
+
+            System.out.println("\nStudent Found");
+            System.out.println("ID: " + rs.getInt("id"));
+            System.out.println("Name: " + rs.getString("name"));
+
+        } else {
+
+            System.out.println("Student Not Found");
+        }
+
+        con.close();
+
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+}
 }

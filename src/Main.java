@@ -12,8 +12,9 @@ public class Main {
             System.out.println("2. View Students");
             System.out.println("3. Update Student");
             System.out.println("4. Delete Student");
-            System.out.println("5. Exit");
-            System.out.print("Enter Choice: ");
+            System.out.println("5. Search Student");
+            System.out.println("6. Search Student By Name");
+            System.out.println("7. Exit");
 
             int choice = sc.nextInt();
 
@@ -55,6 +56,24 @@ public class Main {
     dao.deleteStudent(id);
             }
             else if (choice == 5) {
+                System.out.print("Enter Student ID: ");
+
+    int id = sc.nextInt();
+
+    StudentDAO dao = new StudentDAO();
+
+    dao.searchStudent(id);
+            }
+            else if (choice == 6) {
+                System.out.print("Enter Student Name: ");
+
+    String name = sc.next();
+
+    StudentDAO dao = new StudentDAO();
+
+    dao.searchStudentByName(name);
+            }
+            else if (choice == 7) {
                 System.out.println("Exiting...");
                 break;
             }
